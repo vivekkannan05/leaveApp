@@ -1,0 +1,66 @@
+<html ng-app="leaveApp">
+<header>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <script src='angular.js'></script>
+    <script src='leaveApp.js'></script>
+    <script src='leaveAppHeader.js'></script>
+    <script src='leaveappname.js'></script>
+    <script src='leaveAppController.js'></script>
+    <script src='leaveApp.service.js'></script>
+</header>
+<body>
+<div class="page-header" ng-controller="headerLeaveAppCtrl as head">
+    <h1>{{head.appname}}</h1>
+</div>
+<div ng-controller="leaveAppCtrl as ctrl">
+
+<label for ="name">Enter the name</label>
+<input id="name" type="text" ng-model="ctrl.email"/>
+<button class="btn btn-info" ng-click="ctrl.getEmployee()">NEXT</button>
+   
+    
+
+<div>
+<div class="alert alert-success" ng-if="ctrl.successMsg">{{ctrl.successMsg}}</div>
+<div class="alert alert-danger" ng-if="ctrl.errorMsg">{{ctrl.errorMsg}}</div>
+ NAME:{{ctrl.employeeDetail.name}}<br>
+ DEPARTMENT:{{ctrl.employeeDetail.department}} <br>
+ AVAILABLE LEAVES: {{ctrl.employeeDetail.availableLeaves}}<br>
+ <label for ="startDate">Start Date</label> 
+ <input id="startDate" type="date" ng-model="ctrl.leaveReq.startDate"/>
+ 
+ <label for ="endDate">End Date</label> 
+ <input id="endDate" type="date" ng-model="ctrl.leaveReq.endDate"/>
+ <button ng-click="ctrl.applyLeave()">Apply</button>
+</div>
+
+
+<div>
+<br>
+<br>
+<div class="panel panel-info">
+<div class="panel-heading">
+<h3> Request List</h3>
+</div>
+<table class="table table-striped">
+<tr>
+<th>Request ID</th>
+<th>Start DATE</th>
+<th>END DATE</th>
+<th>NO. Of Days</th>
+<tr ng-repeat="req in ctrl.requestList">
+<td>{{req.id}}</td>
+<td>{{req.startDate| date:'yyyy-MM-dd'}}</td>
+<td>{{req.endDate| date:'yyyy-MM-dd'}}</td>
+<td>{{req.duration}}</td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</html>
